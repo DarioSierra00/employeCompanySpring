@@ -18,7 +18,7 @@ public class CompanyService {
 	private CompanyRepository companyRepository;
 	
 	public Page<Company> getCompanies(int pageNum, int pageSize){
-		Pageable pageable = PageRequest.of(pageNum -1, pageSize);
+		Pageable pageable = PageRequest.of(pageNum, pageSize);
 		return companyRepository.findAll(pageable);
 	}
 	

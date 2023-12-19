@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<div th:replace="layout/head :: head"></div>
+<body>
+<nav th:replace="layout/menu :: menuJacaranda"></nav>
+
+	<div class="container px-5 my-5">
+	  <div class="row justify-content-center">
+	    <div class="col-lg-8">
+	      <div class="card border-0 rounded-3 shadow-lg">
+	        <div class="card-body p-4">
+	          <div class="text-center">
+	            <h1>Editar Empleado</h1>
+	          </div>
+	          <form method="get" th:action="@{editEmployeeConfirm}" th:object="${employee}">
+		          <div class="mb-3">
+		            	<label for="id" class="form-label">ID</label>
+		   				<input type="text" th:field="*{id}" class="form-control" id="id" name="id" placeholder="Ingresa id" required readonly>
+		           </div>
+		           <div class="mb-3">
+		            	<label for="firstName" class="form-label">Nombre</label>
+		   				<input type="text" th:field="*{firstName}" class="form-control" id="firstName" name="firstName" placeholder="Ingresa nombre" required >
+		           </div>
+		
+	          	 	<div class="mb-3">
+		            	<label for="lastName" class="form-label">Apellido</label>
+		   				<input type="text" th:field="*{lastName}" class="form-control" id="lastName" name="lastName" placeholder="Ingresa apellido" required>
+		           	</div>
+		
+		           <div class="mb-3">
+		            	<label for="email" class="form-label">Email</label>
+		   				<input type="email" th:field="*{email}" class="form-control" id="email" name="email" placeholder="Ingresa email" required>
+		           </div>
+		           
+	           		<div class="mb-3">
+		            	<label for="gender" class="form-label">Genero</label>
+		   				<input type="text" th:field="*{gender}" class="form-control" id="gender" name="gender" placeholder="Ingresa genero" required>
+		           </div>
+
+           			<div class="mb-3">
+		            	<label for="dateOfBirth" class="form-label">Fecha de nacimiento</label>
+		   				<input type="date" th:field="*{dateOfBirth}" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="Ingresa fecha de nacimiento" required>
+		           </div>
+		           
+          			<div class="mb-3">
+		            	<label for="dateOfBirth" class="form-label">Selecciona compañia</label><br>
+		            	<select class="form-select" th:field="*{company}" id="company" name="company" required>
+							<option th:each="companyL : ${companies}" th:text="${companyL.name}" th:value="${companyL.id}">
+							</option>
+						</select>
+		           </div>
+
+           			<div class="mb-3">
+		            	<label for="role" class="form-label">Rol</label>
+		   				<input type="text" th:field="*{role}" class="form-control" id="role" name="role" placeholder="Ingresa rol" required>
+		           </div>
+           			
+           			<div class="mb-3">
+		            	<label for="password" class="form-label">Contraseña</label>
+		   				<input type="text" th:field="*{password}" class="form-control" id="password" name="password" placeholder="Ingresa contraseña" required>
+		           </div>
+
+	              	<button class="btn btn-success" id="submitButton" type="submit" name="submit">Editar</button>
+	              	<div th:if="${edit != null}">
+            			<div th:text="${edit}" class="alert alert-success mt-2 d-flex justify-content-center"></div>
+            		</div>
+	          </form>
+	          <!-- End of contact form -->
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+<div th:insert="layout/footer :: pie"></div>
+</body>
+</html>

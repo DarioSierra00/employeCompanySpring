@@ -24,8 +24,14 @@ public class EmployeeController {
 	CompanyService companyService;
 	
 	@GetMapping("/listEmployees")
-	public String listEmployees(Model model) {
-		List<Employee> listEmployees = employeeService.getEmployees();
+	public String listEmployees(Model model,@RequestParam("pageNumber") Integer idPage) {
+		Page<Employee> listEmployees = employeeService.getEmployees(idPage,10);
+		Integer totalItems = (int) listEmployees.getTotalElements();
+		Integer totalPages = listEmployees.getTotalPages();
+		Integer pageNumber = listEmployees.getNumber();	
+		model.addAttribute("currentPage", pageNumber);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalItems", totalItems);
 		model.addAttribute("listEmployees", listEmployees);
 		return "/employee/listEmployees";
 	}
