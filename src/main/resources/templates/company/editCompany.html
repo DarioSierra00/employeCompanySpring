@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="layout/head :: head"></div>
+<body>
+<nav th:replace="layout/menu :: menuJacaranda"></nav>
+
+	<div class="container px-5 my-5">
+	  <div class="row justify-content-center">
+	    <div class="col-lg-8">
+	      <div class="card border-0 rounded-3 shadow-lg">
+	        <div class="card-body p-4">
+	          <div class="text-center">
+	            <h1>Editar Compañia</h1>
+	          </div>
+	
+	          <form method="get" th:action="@{editCompanyConfirm}" th:object="${company}">
+		           <div class=" mb-3">
+		   				<label for="id" class="form-label">ID</label>
+		   				<input type="text" th:field="*{id}" class="form-control" id="id" name="id" required readonly>
+		           </div>
+		
+		           <div class=" mb-3">
+		            	<label for="nameCompany" class="form-label">Nombre de compañia</label>
+		   				<input type="text" th:field="*{name}" class="form-control" id="nameCompany" name="nameCompany" required>
+		           </div>
+		
+	          	 	<div class=" mb-3">
+		            	<label for="cityCompany" class="form-label">Ciudad de compañia</label>
+		   				<input type="text" th:field="*{city}" class="form-control" id="cityCompany" name="cityCompany" required>
+		           	</div>
+		
+		           <div class=" mb-3">
+		            	<label for="addressCompany" class="form-label">Dirección de compañia</label>
+		   				<input type="text" th:field="*{address}" class="form-control" id="addressCompany" name="addressCompany" required>
+		           </div>
+
+	              	<button class="btn btn-danger" id="submitButton" type="submit" name="submit">Editar</button>
+	              	<div th:if="${edit != null}">
+            			<div th:text="${edit}" class="alert alert-success mt-2 d-flex justify-content-center"></div>
+            		</div>
+	          </form>
+	          <!-- End of contact form -->
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+<div th:insert="layout/footer :: pie"></div>
+</body>
+</html>

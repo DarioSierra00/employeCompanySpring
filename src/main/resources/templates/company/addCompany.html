@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<div th:replace="layout/head :: head"></div>
+<body>
+<nav th:replace="layout/menu :: menuJacaranda"></nav>
+
+	<div class="container px-5 my-5">
+	  <div class="row justify-content-center">
+	    <div class="col-lg-8">
+	      <div class="card border-0 rounded-3 shadow-lg">
+	        <div class="card-body p-4">
+	          <div class="text-center">
+	            <h1>Añadir Compañia</h1>
+	          </div>
+	          <form method="get" th:action="@{saveCompany}" th:object="${company}">	
+		           <div class=" mb-3">
+		            	<label for="nameCompany" class="form-label">Nombre de compañia</label>
+		   				<input type="text" th:field="*{name}" class="form-control" id="nameCompany" name="nameCompany" placeholder="Ingresa nombre de compañia" required >
+		           </div>
+		
+	          	 	<div class=" mb-3">
+		            	<label for="cityCompany" class="form-label">Ciudad de compañia</label>
+		   				<input type="text" th:field="*{city}" class="form-control" id="cityCompany" name="cityCompany" placeholder="Ingresa ciudad de compañia" required>
+		           	</div>
+		
+		           <div class=" mb-3">
+		            	<label for="addressCompany" class="form-label">Dirección de compañia</label>
+		   				<input type="text" th:field="*{address}" class="form-control" id="addressCompany" name="addressCompany" placeholder="Ingresa dirección de compañia" required>
+		           </div>
+
+	              	<button class="btn btn-success" id="submitButton" type="submit" name="submit">Guardar</button>
+	              	<div th:if="${add != null}">
+            			<div th:text="${add}" class="alert alert-success mt-2 d-flex justify-content-center"></div>
+            		</div>
+	          </form>
+	          <!-- End of contact form -->
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+<div th:insert="layout/footer :: pie"></div>
+</body>
+</html>

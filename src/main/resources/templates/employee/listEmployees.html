@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<div th:replace="layout/head :: head"></div>
+<body>
+<nav th:replace="layout/menu :: menuJacaranda"></nav>
+
+<h1 align="center">Listado de Empleados</h1>
+
+<table class="table">
+  <thead class="thead-dark">
+		<tr>
+			<th>#</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Email</th>
+			<th>Genero</th>
+			<th>Fecha de nacimiento</th>
+			<th>Compañia</th>
+		</tr>
+	</thead>
+	<tbody>
+	<tr th:each="employeeL :${listEmployees}">
+		<td th:text="${employeeL.id}"></td>
+		<td th:text="${employeeL.firstName}"></td>
+		<td th:text="${employeeL.lastName}"></td>
+		<td th:text="${employeeL.email}"></td>
+		<td th:text="${employeeL.gender}"></td>
+		<td th:text="${employeeL.dateOfBirth}"></td>
+		<td th:text="${employeeL.company.name}"></td>
+
+		<td>
+			<form th:action="@{deleteEmployee}">
+				<input type="text" th:value="${employeeL.id}" name="id" id="id" hidden>
+				<button class="btn btn-info" type="submit" value="delete" name="delete">Borrar</button>
+			</form>
+		</td>
+		<td>
+			<form th:action="@{editEmployee}">
+				<input type="text" th:value="${employeeL.id}" name="id" id="id" hidden>
+				<button class="btn btn-info" type="submit" value="edit" name="edit">Editar</button>
+			</form>
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+<div th:insert="layout/footer :: pie"></div>
+</body>
+</html>
