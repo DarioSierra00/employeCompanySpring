@@ -17,7 +17,7 @@ public class CompanyService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	public Page<Company> getCompanies(int pageNum, int pageSize,String sortField,Boolean si){
+	public Page<Company> getCompanies(int pageNum, int pageSize){
 		Pageable pageable = PageRequest.of(pageNum, pageSize);
 		return companyRepository.findAll(pageable);
 	}

@@ -9,9 +9,9 @@
 <table class="table">
   <thead class="thead-dark">
 		<tr>
-			<th>#</th>
-			<th><a th:href="@{'/listEmployees?order=firstName&ascOrDesc=true&pageNumber='+${currentPage}}">Nombre</a></th>
-			<th><a href="@{'/listEmployees?order=lastName&pageNumber='+${currentPage}}">Apellido</a></th>
+			<th>Id</th>
+			<th><a th:href="@{'/listEmployees?order=firstName&pageNumber='+${currentPage}+'&asc='+ ${asc}}">Nombre</a></th>
+			<th><a th:href="@{'/listEmployees?order=lastName&pageNumber='+${currentPage}+'&asc='+ ${asc}}">Apellido</a></th>	
 			<th>Email</th>
 			<th>Genero</th>
 			<th>Fecha de nacimiento</th>

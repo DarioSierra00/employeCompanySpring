@@ -18,18 +18,19 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
-	public Page<Employee> getEmployees(String pageNum, int pageSize,String sortField,Boolean ascOrDesc){
+	public Page<Employee> getEmployees(String pageNum, int pageSize,String sortField,Boolean asc){
 		Pageable pageable = null;
 		try {
 			Integer pageNumInt = Integer.valueOf(pageNum);
-			if(ascOrDesc) {
+			if(asc) {
 				pageable = PageRequest.of(pageNumInt, pageSize,Sort.by(sortField).ascending());
+				
+			}else {
+				pageable = PageRequest.of(pageNumInt, pageSize,Sort.by(sortField).descending());		
 			}
-			else {
-				pageable = PageRequest.of(pageNumInt, pageSize,Sort.by(sortField).descending());
-			}
+		
 			
-		} catch (Exception e) {
+			}catch (Exception e) {
 			pageable = PageRequest.of(1, pageSize);
 		}
 		return employeeRepository.findAll(pageable);

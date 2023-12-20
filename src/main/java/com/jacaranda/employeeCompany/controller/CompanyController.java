@@ -22,7 +22,7 @@ public class CompanyController {
 	
 	@GetMapping("/listCompanies")
 	public String listCompany(Model model, @RequestParam("pageNumber") Integer idPage) {
-		Page<Company> listCompanies = companyService.getCompanies(idPage, 11,"name");
+		Page<Company> listCompanies = companyService.getCompanies(idPage, 11);
 		Integer totalItems = (int) listCompanies.getTotalElements();
 		Integer totalPages = listCompanies.getTotalPages();
 		Integer pageNumber = listCompanies.getNumber();	
