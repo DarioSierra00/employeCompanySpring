@@ -10,8 +10,8 @@
   <thead class="thead-dark">
 		<tr>
 			<th>#</th>
-			<th>Nombre</th>
-			<th>Apellido</th>
+			<th><a th:href="@{'/listEmployees?order=firstName&ascOrDesc=true&pageNumber='+${currentPage}}">Nombre</a></th>
+			<th><a href="@{'/listEmployees?order=lastName&pageNumber='+${currentPage}}">Apellido</a></th>
 			<th>Email</th>
 			<th>Genero</th>
 			<th>Fecha de nacimiento</th>

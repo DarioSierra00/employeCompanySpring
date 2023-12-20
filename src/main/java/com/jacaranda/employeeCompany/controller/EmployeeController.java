@@ -1,6 +1,7 @@
 package com.jacaranda.employeeCompany.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,8 +25,9 @@ public class EmployeeController {
 	CompanyService companyService;
 	
 	@GetMapping("/listEmployees")
-	public String listEmployees(Model model,@RequestParam("pageNumber") Integer idPage) {
-		Page<Employee> listEmployees = employeeService.getEmployees(idPage,10);
+	public String listEmployees(Model model,@RequestParam("pageNumber") Optional<String> idPage, @RequestParam("order") Optional<String> order,@RequestParam("ascOrDesc") Boolean ascOrDesc) {
+		ascOrDesc = false;
+		Page<Employee> listEmployees = employeeService.getEmployees(idPage.orElse("1"),10,order.orElse("id"),ascOrDesc);
 		Integer totalItems = (int) listEmployees.getTotalElements();
 		Integer totalPages = listEmployees.getTotalPages();
 		Integer pageNumber = listEmployees.getNumber();	
@@ -41,7 +43,7 @@ public class EmployeeController {
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
 		
-		Page<Company> companies = companyService.getCompanies(11,10);
+		Page<Company> companies = companyService.getCompanies(11,10,"firstName");
 		model.addAttribute("companies", companies);
 
 		return "/employee/addEmployee";
@@ -61,7 +63,7 @@ public class EmployeeController {
 	@GetMapping("/editEmployee")
 	public String editEmployee(Model model,@RequestParam("id") Employee employee) {
 		model.addAttribute("employee", employee);
-		Page<Company> companies = companyService.getCompanies(11,10);
+		Page<Company> companies = companyService.getCompanies(11,10,"firstName");
 		model.addAttribute("companies", companies);
 		
 		return "/employee/editEmployee";
@@ -72,7 +74,7 @@ public class EmployeeController {
 		model.addAttribute("employee", employeeEdit);
 		employeeService.edit(employeeEdit);
 		model.addAttribute("edit","Empleado editado correctamente");
-		Page<Company> companies = companyService.getCompanies(11,10);
+		Page<Company> companies = companyService.getCompanies(11,10,"firstName");
 		model.addAttribute("companies", companies);
 		
 		return "/employee/editEmployee";
