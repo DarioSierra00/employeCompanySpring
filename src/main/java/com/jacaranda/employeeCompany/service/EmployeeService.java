@@ -36,6 +36,19 @@ public class EmployeeService {
 		return employeeRepository.findAll(pageable);
 	}
 	
+	public List<Employee> getEmployeesBySearch(String keyword){
+		List<Employee> pageable = null;
+		
+		try {
+			pageable = employeeRepository.searchByEmployee(keyword);
+
+		} catch (Exception e) {
+			
+		}
+		return pageable;
+	}
+
+	
 	public void save(Employee employee) {
 		employeeRepository.save(employee);
 	}

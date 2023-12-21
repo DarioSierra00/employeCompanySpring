@@ -9,10 +9,10 @@
 <table class="table">
   <thead class="thead-dark">
 		<tr>
-			<th>#</th>
-			<th>Nombre</th>
-			<th>Dirección</th>
-			<th>Ciudad</th>
+			<th><a th:href="@{'/listCompanies?order=id&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Id</th>
+			<th><a th:href="@{'/listCompanies?order=name&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Nombre</th>
+			<th><a th:href="@{'/listCompanies?order=address&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Dirección</th>
+			<th><a th:href="@{'/listCompanies?order=city&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Ciudad</th>
 			<th>Borrar</th>
 			<th>Editar</th>
 

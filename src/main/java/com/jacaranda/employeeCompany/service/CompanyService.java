@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.jacaranda.employeeCompany.model.Company;
@@ -17,8 +18,20 @@ public class CompanyService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	public Page<Company> getCompanies(int pageNum, int pageSize){
-		Pageable pageable = PageRequest.of(pageNum, pageSize);
+	public Page<Company> getCompanies(String pageNum, int pageSize,String order,Boolean asc){
+		Pageable pageable = null;
+		try {
+			Integer pageNumInt = Integer.valueOf(pageNum);
+			if(asc) {
+				pageable = PageRequest.of(pageNumInt, pageSize,Sort.by(order).ascending());
+			}
+			else {
+				pageable = PageRequest.of(pageNumInt, pageSize,Sort.by(order).descending());
+			}
+			
+		} catch (Exception e) {
+			pageable = PageRequest.of(1, pageSize,Sort.by(order).ascending());
+		}
 		return companyRepository.findAll(pageable);
 	}
 	

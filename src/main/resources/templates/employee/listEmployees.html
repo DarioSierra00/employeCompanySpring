@@ -5,17 +5,23 @@
 <nav th:replace="layout/menu :: menuJacaranda"></nav>
 
 <h1 align="center">Listado de Empleados</h1>
-
+<form th:action="@{/elements}">
+ Filter: <input type="text" name="keyword" id="keyword" size="50"th:value="${keyword}" required />
+ &nbsp;
+ <input type="submit" value="Search" />
+ &nbsp;
+ <input type="reset" value="Clear" id="btnClear"/>
+</form>
 <table class="table">
   <thead class="thead-dark">
 		<tr>
-			<th>Id</th>
-			<th><a th:href="@{'/listEmployees?order=firstName&pageNumber='+${currentPage}+'&asc='+ ${asc}}">Nombre</a></th>
-			<th><a th:href="@{'/listEmployees?order=lastName&pageNumber='+${currentPage}+'&asc='+ ${asc}}">Apellido</a></th>	
-			<th>Email</th>
-			<th>Genero</th>
-			<th>Fecha de nacimiento</th>
-			<th>Compañia</th>
+			<th><a th:href="@{'/listEmployees?order=id&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Id</th>
+			<th><a th:href="@{'/listEmployees?order=firstName&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Nombre</a></th>
+			<th><a th:href="@{'/listEmployees?order=lastName&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Apellido</a></th>	
+			<th><a th:href="@{'/listEmployees?order=email&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Email</th>
+			<th><a th:href="@{'/listEmployees?order=gender&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Genero</th>
+			<th><a th:href="@{'/listEmployees?order=dateOfBirth&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Fecha de nacimiento</th>
+			<th><a th:href="@{'/listEmployees?order=company&pageNumber='+${currentPage}+'&asc='+ ${!asc}}">Compañia</th>
 		</tr>
 	</thead>
 	<tbody>
