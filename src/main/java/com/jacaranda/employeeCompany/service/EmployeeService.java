@@ -18,8 +18,9 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
-	public Page<Employee> getEmployees(String pageNum, int pageSize,String sortField,Boolean asc){
+	public Page<Employee> getEmployees(String pageNum, int pageSize,String sortField,Boolean asc,String keyword){
 		Pageable pageable = null;
+		Page<Employee> page = null;
 		try {
 			Integer pageNumInt = Integer.valueOf(pageNum);
 			if(asc) {
@@ -29,25 +30,18 @@ public class EmployeeService {
 				pageable = PageRequest.of(pageNumInt, pageSize,Sort.by(sortField).descending());		
 			}
 		
+			if(!keyword.isBlank()) {
+				page = employeeRepository.findByFirstName(keyword, pageable);
+			}
+			else {
+				page = employeeRepository.findAll(pageable);
+			}
 			
 			}catch (Exception e) {
-			pageable = PageRequest.of(1, pageSize);
+			pageable = PageRequest.of(0, pageSize);
 		}
-		return employeeRepository.findAll(pageable);
+		return page;
 	}
-	
-	public List<Employee> getEmployeesBySearch(String keyword){
-		List<Employee> pageable = null;
-		
-		try {
-			pageable = employeeRepository.searchByEmployee(keyword);
-
-		} catch (Exception e) {
-			
-		}
-		return pageable;
-	}
-
 	
 	public void save(Employee employee) {
 		employeeRepository.save(employee);

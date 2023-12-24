@@ -26,39 +26,22 @@ public class EmployeeController {
 	
 	@GetMapping("/listEmployees")
 	public String listEmployees(Model model,@RequestParam("pageNumber") Optional<String> idPage, @RequestParam("order") Optional<String> order,@RequestParam("asc") Optional<Boolean> asc,@RequestParam("keyword") Optional<String> keyword) {
-		if(keyword != null) {
-			List<Employee> listEmployees = employeeService.getEmployeesBySearch(keyword.orElse("firstName"));
-			model.addAttribute("listEmployees", listEmployees);
-		}
-		else {
-			Page<Employee> listEmployees = employeeService.getEmployees(idPage.orElse("0"),10,order.orElse("id"),asc.orElse(true));
-			Integer totalItems = (int) listEmployees.getTotalElements();
-			Integer totalPages = listEmployees.getTotalPages();
-			Integer pageNumber = listEmployees.getNumber();	
-			
-			model.addAttribute("asc", asc.orElse(true));
-			model.addAttribute("currentPage", pageNumber);
-			model.addAttribute("totalPages", totalPages);
-			model.addAttribute("totalItems", totalItems);
-			model.addAttribute("listEmployees", listEmployees);
-		}
-		return "/employee/listEmployees";
-	}
-	
-	@GetMapping("/elements")
-	public String searchEmployee(Model model,@RequestParam("pageNumber") Optional<String> idPage, @RequestParam("order") Optional<String> order,@RequestParam("asc") Optional<Boolean> asc) {
-		Page<Employee> listEmployees = employeeService.getEmployeesBySearch(keyword);
+
+		Page<Employee> listEmployees = employeeService.getEmployees(idPage.orElse("0"), 10, order.orElse("id"),
+				asc.orElse(true), keyword.orElse(" "));
 		Integer totalItems = (int) listEmployees.getTotalElements();
 		Integer totalPages = listEmployees.getTotalPages();
-		Integer pageNumber = listEmployees.getNumber();	
-		
+		Integer pageNumber = listEmployees.getNumber();
+
 		model.addAttribute("asc", asc.orElse(true));
 		model.addAttribute("currentPage", pageNumber);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("totalItems", totalItems);
 		model.addAttribute("listEmployees", listEmployees);
+
 		return "/employee/listEmployees";
 	}
+	
 	
 	@GetMapping("/addEmployee")
 	public String addEmployee(Model model,@RequestParam("pageNumber") Optional<String> idPage, @RequestParam("order") Optional<String> order,@RequestParam("asc") Optional<Boolean> asc) {
@@ -85,7 +68,7 @@ public class EmployeeController {
 	@GetMapping("/editEmployee")
 	public String editEmployee(Model model,@RequestParam("id") Employee employee,@RequestParam("pageNumber") Optional<String> idPage, @RequestParam("order") Optional<String> order,@RequestParam("asc") Optional<Boolean> asc) {
 		model.addAttribute("employee", employee);
-		Page<Company> companies = companyService.getCompanies(idPage.orElse("1"), 11,order.orElse("1"),asc.orElse(false));
+		Page<Company> companies = companyService.getCompanies(idPage.orElse("1"), 11,order.orElse("id"),asc.orElse(false));
 		model.addAttribute("companies", companies);
 		
 		return "/employee/editEmployee";
